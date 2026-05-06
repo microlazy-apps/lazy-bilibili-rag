@@ -8,3 +8,7 @@ __pycache__/
 # Rendered from *.template.yml by lazycat-ci/scripts/build-lpk.sh
 lazycat/package.yml
 lazycat/lzc-manifest.yml
+
+# Personal/local notes
+.claude.local.md
+

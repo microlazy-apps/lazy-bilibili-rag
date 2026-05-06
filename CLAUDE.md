@@ -122,6 +122,12 @@ docker job before `docker build`, with `--directory=vendor/bilibili-rag`.
 
 ## Release flow (`v*` tag)
 
+> First release of a brand-new package id must go through
+> `bootstrap-app.yml` to register the app in lazycat developer center;
+> otherwise `release.yml`'s `publish-appstore` job fails with
+> `当前想发布的应用没有在 ...创建`.
+
+
 ```
 git tag v0.1.0 && git push --tags
   ↓
@@ -188,6 +194,11 @@ bash ~/lazycat-ci/scripts/build-lpk.sh \
   --patches-target vendor/bilibili-rag
 # → lazycat/cloud.lazycat.app.bilibili-rag-0.0.0-dev.lpk
 ```
+
+`lzc-cli` will emit `[lint] App Store submission requires
+services.main.image to start with registry.lazycat.cloud` — benign for
+local smoke tests; the lpk is still produced and installable via
+`lpk-manager install`.
 
 The first build is heavy: it fetches Node 20 + nginx + ffmpeg + the
 Python venv (chromadb / langchain / openai / dashscope etc.) and compiles
