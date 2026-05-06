@@ -90,6 +90,24 @@ the `/lzcapp/var/persist` bind.
   ChromaDB collection (`chroma_db/`)
 - `/lzcapp/var/logs:/app/logs`   — loguru-rotated app logs (10 MB / 7 days)
 
+## Icon
+
+`lazycat/icon.png` is cropped from upstream's
+`vendor/bilibili-rag/assets/screenshots/home.png` (BiliMind brand-mark,
+dark rounded square with white burger). Re-derive from upstream — do
+NOT magick-paint a synthetic placeholder:
+
+```sh
+magick vendor/bilibili-rag/assets/screenshots/home.png \
+  -crop 125x125+40+260 +repage \
+  -filter Lanczos -resize 360x360 /tmp/mark_big.png
+magick -size 512x512 xc:'#F4F0E8' /tmp/mark_big.png \
+  -gravity center -compose over -composite lazycat/icon.png
+```
+
+If upstream redesigns the brand-mark, re-take a fresh `home.png` first;
+adjust the `-crop` offset/size to bound the new mark.
+
 ## Patches workflow
 
 ```sh
@@ -151,6 +169,9 @@ release.yml (caller, this repo)
 
 - `/app/create` returns 500 on duplicate package — pass `app_id` workflow
   input to skip create on retry.
+- After deleting an app from the lazycat developer center to redo
+  bootstrap, bump `version` (e.g. `0.1.0` → `0.1.1`) before re-running;
+  the appstore enforces strict monotonic semver per package id.
 
 ## One-time setup (org-level)
 
