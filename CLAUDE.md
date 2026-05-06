@@ -173,6 +173,14 @@ release.yml (caller, this repo)
   bootstrap, bump `version` (e.g. `0.1.0` → `0.1.1`) before re-running;
   the appstore enforces strict monotonic semver per package id.
 
+The bootstrap run does **not** publish a GitHub Release; grab its lpk
+from the workflow artifact instead:
+
+```sh
+gh run download <RUN_ID> -R microlazy-apps/lazy-bilibili-rag \
+  -n lpk -D /tmp/lpk
+```
+
 ## One-time setup (org-level)
 
 - Org self-hosted runner `xiaomoru` registered at microlazy-apps level
