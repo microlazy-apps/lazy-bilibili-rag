@@ -1,0 +1,54 @@
+source: https://github.com/via007/bilibili-rag
+source_author: via007
+is_original: false
+keywords: bilibili,rag,knowledge-base,asr,vector-search,chromadb,langchain,dashscope,qwen,llm
+support_pc: true
+support_mobile: false
+
+screenshots:
+  pc:
+    - lazycat/screenshots/01-home.png
+    - lazycat/screenshots/02-chat.png
+  mobile: []
+
+description:
+  zh-CN: |
+    Bilibili-RAG 把 B 站收藏夹变成可对话的知识库 —— 收藏不吃灰。
+
+    自动完成：扫码登录 B 站 → 读收藏夹 → 拉音频 → DashScope ASR
+    转写 → 向量化入库 ChromaDB → 基于 RAG 的对话问答与语义检索。
+
+    特性：
+    - 扫码登录 B 站，安全便捷
+    - 自动音频转文字（含本地 ffmpeg 转码兜底）
+    - 本地 SQLite + ChromaDB 持久化
+    - 基于 RAG 的对话问答（来源可追溯到视频片段）
+    - 兼容多种 LLM（DashScope 上的 qwen3-max / qwen-plus / qwen-turbo 等）
+    - Next.js 前端 + FastAPI 后端单镜像部署
+
+    依赖：
+    - DashScope API Key（阿里云百炼 https://bailian.console.aliyun.com）
+
+    上游项目: https://github.com/via007/bilibili-rag
+    本仓库（懒猫包装）: https://github.com/microlazy-apps/lazy-bilibili-rag
+  en: |
+    Bilibili-RAG turns your Bilibili favorites into a chattable knowledge
+    base — saved videos finally become searchable.
+
+    Pipeline: QR-scan login → fetch favorites → pull audio →
+    DashScope ASR transcription → vectorize into ChromaDB → RAG-based
+    Q&A and semantic search with cited video segments.
+
+    Features:
+    - QR-scan Bilibili login
+    - Automatic audio-to-text (with local ffmpeg fallback)
+    - Local SQLite + ChromaDB persistence
+    - RAG Q&A with source citations back to specific videos
+    - Multi-LLM support via DashScope (qwen3-max / qwen-plus / qwen-turbo)
+    - Single-image deployment (Next.js frontend + FastAPI backend + nginx)
+
+    Requires:
+    - DashScope API Key (Alibaba Bailian)
+
+    Upstream project: https://github.com/via007/bilibili-rag
+    This wrapper repo: https://github.com/microlazy-apps/lazy-bilibili-rag

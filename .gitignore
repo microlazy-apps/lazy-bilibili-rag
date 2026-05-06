@@ -1,0 +1,10 @@
+*.lpk
+.DS_Store
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+
+# Rendered from *.template.yml by lazycat-ci/scripts/build-lpk.sh
+lazycat/package.yml
+lazycat/lzc-manifest.yml

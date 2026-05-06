@@ -1,0 +1,27 @@
+params:
+  - id: DASHSCOPE_API_KEY
+    type: password
+    name: "DashScope API Key"
+    description: "阿里云百炼 (DashScope) API Key，同时用于 LLM、Embedding 与 ASR。在 https://bailian.console.aliyun.com 申请。"
+    optional: false
+
+  - id: LLM_MODEL
+    type: string
+    name: "LLM 模型"
+    description: "对话模型名称，默认 qwen3-max。可选 qwen-plus / qwen-turbo / qwen2.5-72b-instruct 等。"
+    default_value: "qwen3-max"
+    optional: true
+
+  - id: EMBEDDING_MODEL
+    type: string
+    name: "Embedding 模型"
+    description: "向量模型名称，默认 text-embedding-v4。"
+    default_value: "text-embedding-v4"
+    optional: true
+
+  - id: ASR_MODEL
+    type: string
+    name: "ASR 模型"
+    description: "语音识别模型，默认 paraformer-v2。"
+    default_value: "paraformer-v2"
+    optional: true

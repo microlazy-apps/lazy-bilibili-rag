@@ -1,0 +1,76 @@
+package: cloud.lazycat.app.bilibili-rag
+version: ${VERSION}
+name: Bilibili-RAG
+description: B 站收藏夹 RAG 知识库 — 自动转写 + 向量检索 + 对话问答
+author: via007
+license: MIT
+homepage: https://github.com/microlazy-apps/lazy-bilibili-rag
+locales:
+  zh-CN:
+    name: Bilibili-RAG
+    description: 自托管 B 站收藏夹知识库 —— 把访谈/演讲/课程等收藏视频，变成可检索、可对话的个人知识库
+    usage: |
+      ## 关于 Bilibili-RAG
+
+      把 B 站收藏夹里的访谈、演讲、课程、技术分享等视频，自动转成
+      可对话的知识库。流程：
+
+      1. 扫码登录 B 站，读取收藏夹
+      2. 拉取视频音频，自动转写文字（DashScope ASR）
+      3. 文本向量化、写入本地 ChromaDB
+      4. 基于 RAG 的对话问答 / 语义检索
+
+      ## 配置
+
+      安装时填写一次：
+      - **DashScope API Key**（必填）— 阿里云百炼 https://bailian.console.aliyun.com
+      - LLM 模型 / Embedding 模型 / ASR 模型（默认值通常够用）
+
+      多数模型有免费额度，日常使用通常不会超量。短视频测试更省钱。
+
+      ## 使用
+
+      装好后访问 https://bilibili-rag.{你的微服域名}：
+      1. 扫码登录 B 站
+      2. 选择收藏夹 → 同步入库
+      3. 在对话窗口提问，命中相关视频片段并给出来源
+
+      ## 数据持久化
+
+      - /lzcapp/var/persist/  — SQLite 数据库 + ChromaDB 向量库
+      - /lzcapp/var/logs/     — 应用日志
+  en:
+    name: Bilibili-RAG
+    description: Self-hosted Bilibili favorites RAG — turn your saved videos into a chattable, searchable personal knowledge base
+    usage: |
+      ## About Bilibili-RAG
+
+      Turn your Bilibili favorites (interviews, talks, courses, tech
+      videos) into a searchable, chattable knowledge base:
+
+      1. Scan-to-login Bilibili, read your favorites
+      2. Auto-transcribe audio (DashScope ASR)
+      3. Vectorize transcripts into local ChromaDB
+      4. RAG-based Q&A and semantic search
+
+      ## Configuration
+
+      One-time install inputs:
+      - **DashScope API Key** (required) — Alibaba Bailian
+        https://bailian.console.aliyun.com
+      - LLM / Embedding / ASR model names (defaults usually fine)
+
+      Most DashScope models have generous free tiers — short test videos
+      keep costs near zero.
+
+      ## Usage
+
+      After install, open https://bilibili-rag.{your-box-domain}:
+      1. Scan QR to log in to Bilibili
+      2. Pick a favorites folder → sync to vector store
+      3. Ask questions; cited video segments come back as sources
+
+      ## Persistent storage
+
+      - /lzcapp/var/persist/  — SQLite DB + ChromaDB vector store
+      - /lzcapp/var/logs/     — application logs

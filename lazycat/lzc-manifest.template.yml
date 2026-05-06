@@ -1,0 +1,48 @@
+application:
+  subdomain: bilibili-rag
+  upstreams:
+    - location: /
+      backend: http://main:80
+  public_path:
+    - /
+  health_check:
+    test_url: http://main:80/health
+    timeout: 10s
+    start_period: 60s
+
+services:
+  main:
+    image: ${LAZYCAT_IMAGE}
+    environment:
+      - TZ=Asia/Shanghai
+
+      # DashScope (LLM + Embedding via OpenAI-compatible endpoint)
+      - DASHSCOPE_API_KEY={{.U.DASHSCOPE_API_KEY}}
+      - OPENAI_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+      - LLM_MODEL={{.U.LLM_MODEL}}
+      - EMBEDDING_MODEL={{.U.EMBEDDING_MODEL}}
+
+      # DashScope ASR
+      - DASHSCOPE_BASE_URL=https://dashscope.aliyuncs.com/api/v1
+      - ASR_MODEL={{.U.ASR_MODEL}}
+      - ASR_TIMEOUT=600
+      - ASR_MODEL_LOCAL=paraformer-realtime-v2
+      - ASR_INPUT_FORMAT=pcm
+
+      # FastAPI binds to 127.0.0.1; nginx fronts it on :80
+      - APP_HOST=127.0.0.1
+      - APP_PORT=8000
+      - DEBUG=false
+
+      # Persisted to /lzcapp/var/persist via the bind below
+      - DATABASE_URL=sqlite+aiosqlite:////app/data/bilibili_rag.db
+      - CHROMA_PERSIST_DIRECTORY=/app/data/chroma_db
+    binds:
+      - /lzcapp/var/persist:/app/data
+      - /lzcapp/var/logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
